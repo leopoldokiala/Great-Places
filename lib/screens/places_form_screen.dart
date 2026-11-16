@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import '../widgets/image_input.dart';
 
 class PlacesFormScreen extends StatefulWidget {
-  const new({super.key});
+  const PlacesFormScreen({super.key});
 
   @override
   State<PlacesFormScreen> createState() => _PlacesFormScreenState();
 }
 
 class _PlacesFormScreenState extends State<PlacesFormScreen> {
+  final _titleController = TextEditingController();
+
+  void _submitForm() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +26,10 @@ class _PlacesFormScreenState extends State<PlacesFormScreen> {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    TextField(decoration: InputDecoration(labelText: 'Título')),
+                    TextField(
+                      controller: _titleController,
+                      decoration: InputDecoration(labelText: 'Título'),
+                    ),
                     SizedBox(height: 10),
                     ImageInput(),
                   ],
@@ -42,7 +48,7 @@ class _PlacesFormScreenState extends State<PlacesFormScreen> {
               elevation: WidgetStatePropertyAll(0),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
-            onPressed: () {},
+            onPressed: _submitForm,
             label: Text('Adicionar'),
             icon: Icon(Icons.add),
           ),
