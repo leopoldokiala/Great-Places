@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../widgets/image_input.dart';
@@ -11,6 +13,11 @@ class PlacesFormScreen extends StatefulWidget {
 
 class _PlacesFormScreenState extends State<PlacesFormScreen> {
   final _titleController = TextEditingController();
+  File? _pickedImage;
+
+  void _selectedImage(File pickedImage) {
+    _pickedImage = pickedImage;
+  }
 
   void _submitForm() {}
   @override
@@ -31,7 +38,7 @@ class _PlacesFormScreenState extends State<PlacesFormScreen> {
                       decoration: InputDecoration(labelText: 'Título'),
                     ),
                     SizedBox(height: 10),
-                    ImageInput(),
+                    ImageInput(onSelectImage: () => _pickedImage),
                   ],
                 ),
               ),
