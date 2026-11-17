@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:great_places/providers/great_places.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/image_input.dart';
 
@@ -19,7 +21,17 @@ class _PlacesFormScreenState extends State<PlacesFormScreen> {
     _pickedImage = pickedImage;
   }
 
-  void _submitForm() {}
+  void _submitForm() {
+    if (_titleController.text.isEmpty || _pickedImage == null) {
+      return;
+    }
+    Provider.of<GreatPlaces>(
+      context,
+      listen: false,
+    ).addPlace(_titleController.text, _pickedImage!);
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +50,7 @@ class _PlacesFormScreenState extends State<PlacesFormScreen> {
                       decoration: InputDecoration(labelText: 'Título'),
                     ),
                     SizedBox(height: 10),
-                    ImageInput(onSelectImage: () => _pickedImage),
+                    ImageInput((savedImage) => _selectedImage(savedImage)),
                   ],
                 ),
               ),
